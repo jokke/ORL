@@ -32,7 +32,9 @@ $config['salt_pattern'] = '1, 3, 5, 9, 14, 15, 20, 21, 28, 30';
  * Set the auto-login (remember me) cookie lifetime, in seconds. The default
  * lifetime is two weeks.
  */
-$config['lifetime'] = 1209600;
+#$config['lifetime'] = 1209600;
+# For a year
+$config['lifetime'] = 31556736;
 
 /**
  * Set the session key that will be used to store the current user.

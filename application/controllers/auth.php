@@ -159,9 +159,14 @@ class Auth_Controller extends Template_Controller {
 			->pre_filter('trim')
 			->add_rules('username', 'required', 'length[4,127]')
 			->add_rules('password', 'required');
-
+        
 		if ($post->validate())
 		{
+		    $remember = FALSE;
+		    if (isset($_POST['remember'])) {
+		        $remember = TRUE;
+	        }
+	        
 			$user = ORM::factory('user', $post['username']);
 
 			if ( ! $user->loaded)
@@ -169,9 +174,8 @@ class Auth_Controller extends Template_Controller {
 				// The user could not be located
 				$post->add_error('username', 'not_found');
 			}
-			elseif (Auth::instance()->login($user, $post['password']))
+			elseif (Auth::instance()->login($user, $post['password'], $remember))
 			{
-				// Successful login
 				url::redirect('auth/logged_in');
 			}
 			else

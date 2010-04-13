@@ -10,5 +10,18 @@ class Document_Controller extends Website_Controller {
         $this->template->content->document = $document;
 
     }
+    
+    public function unpublished() {
+        $documents = new Document_Model();
+        $documents = ORM::factory("Document")
+        	->where('viewable', 'n')
+        	->orderby(array('create_dt' => 'asc'))
+        	->find_all();
+
+        echo Kohana::debug($documents);
+        $this->template->title = "Listing unpublished uploads";
+        $this->template->content = new View('pages/doc_unpub');
+        $this->template->content->documents = $documents;
+    }
 }
 ?>

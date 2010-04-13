@@ -14,12 +14,23 @@ class Website_Controller extends Template_Controller {
     
         $this->session = Session::instance();
         $authentic = new Auth;
-        if (!$authentic->logged_in()) {
-            $this->session->set("requested_url","/".url::current()); // this will redirect from the login page back to this page
-            url::redirect('/auth/login');
+        if ($authentic->logged_in() || $authentic->auto_login()) {
+            $this->user = $authentic->get_user();
         } else {
-            $this->user = $authentic->get_user(); //now you have access to user information stored in the database
+            $this->session->set("requested_url","/".url::current()); // this will redirect from the login page back to this page
+            url::redirect('/auth/login');            
         }
+        // if ($authentic->auto_login()) {
+        //     $this->user = $authentic->get_user();
+        //     url::redirect('/document/view/1');
+        // }
+        // if (!$authentic->logged_in()) {
+        //     
+        //     $this->session->set("requested_url","/".url::current()); // this will redirect from the login page back to this page
+        //     url::redirect('/auth/login');
+        // } else {
+        //     $this->user = $authentic->get_user(); //now you have access to user information stored in the database
+        // }
     }
 }
 ?>

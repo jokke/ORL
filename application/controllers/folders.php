@@ -16,7 +16,12 @@ class Folders_Controller extends Website_Controller {
         $this->template->content->folders = $folder->children;
         $this->template->content->documents = $folder->documents;
 
-        // echo Kohana::debug(ORM::factory("Folder", $parent_id)->children->as_array());
+        $authentic=new Auth;
+	    if ($authentic->logged_in('login')) {
+	        $this->template->content->admin = array();
+	        $this->template->content->admin[] = 'hej';
+        }
+       // echo Kohana::debug(ORM::factory("Folder", $parent_id)->children->as_array());
         // echo Kohana::debug(ORM::factory("Folder", 3)->parent->name);
     }
 }

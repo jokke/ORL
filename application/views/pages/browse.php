@@ -1,3 +1,11 @@
+<?php
+if (isset($admin)):
+?>
+    Create a new folder
+<?php
+endif;
+?>
+
 <table class="folder" width="100%">
 <tbody>
 <tr>

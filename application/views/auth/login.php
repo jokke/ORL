@@ -18,6 +18,9 @@
 <label><span>Username</span><?php echo form::input('username', $post['username']) ?></label>
 <p><small>Email addresses can also be used to login.</small></p>
 <label><span>Password</span><?php echo form::password('password', $post['password']) ?></label>
+<label><span>Remember my login?</span><?php 
+echo form::checkbox('remember', 'yes', TRUE);
+?></label>
 </fieldset>
 
 <fieldset class="submit"><?php echo form::button(NULL, 'Login') ?></fieldset>
